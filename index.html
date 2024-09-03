@@ -9,21 +9,27 @@
   </head>
   <body>
     <!-- playboard -->
-    <div class="dicecontent">
-      <div class="playboardDiv" id="playgroundId">
-        <img
-          src="imgs/gameTable.jpg"
-          width="300"
-          height="300"
-          alt="playboard"
-        />
+    <div class="gameandboard">
+      <div class="dicecontent">
+        <div class="playboardDiv" id="playgroundId">
+          <img
+            class="playboardImg"
+            src="imgs/gameTable.jpg"
+            width="300"
+            height="300"
+            alt="playboard"
+          />
+        </div>
+        <!-- dices -->
+        <div class="dicesDiv" id="dicesId">
+          <img src="imgs/dices.png" width="300" height="200" alt="dices" />
+        </div>
       </div>
-      <!-- dices -->
-      <div class="dicesDiv" id="dicesId">
-        <img src="imgs/dices.png" width="300" height="200" alt="dices" />
+      <div class="scoreboard">
+        Score
+        <div id="playerName"></div>
       </div>
     </div>
-    <div class="scoreboard">Score</div>
     <div class="buttons">
       <button>Rules</button>
       <button>start game</button>
