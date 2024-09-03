@@ -11,18 +11,17 @@
   justify-content: center;
 }
 
-<<<<<<< HEAD
 .scoreboard {
   background-color: deeppink;
   border-radius: 10px;
   width: 200px;
   height: 300px;
 }
-=======
+
 .playboardImg {
   width: 600px;
 }
 .dicesImg {
   width: 180px;
 }
->>>>>>> f98b45910d9cdfe15cdd0056ab96345a5f1c64e1
+
