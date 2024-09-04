@@ -1,15 +1,19 @@
 const playersAdded = [];
-
+const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
+let heldDiceValues = [null, null, null, null, null, null];
+
 function TriggerOnOfHold(dice) {
   let diceNumber = parseInt(dice.id.replace("dice", "")) - 1;
 
   if (diceOnHold[diceNumber]) {
     dice.style.opacity = "1";
     diceOnHold[diceNumber] = false;
+    heldDiceValues[diceNumber] = null;
   } else {
     dice.style.opacity = "0.2";
     diceOnHold[diceNumber] = true;
+    heldDiceValues[diceNumber] = diceValues[diceNumber];
   }
 }
 
@@ -57,8 +61,17 @@ function rulTerning() {
   ];
 
   for (let i = 1; i <= 6; i++) {
-    const randomIndex = Math.floor(Math.random() * imgs.length);
+    // const randomIndex = Math.floor(Math.random() * imgs.length);
 
-    document.getElementById("dices" + i).src = imgs[randomIndex];
+    // document.getElementById("dices" + i).src = imgs[randomIndex];
+    if (!diceOnHold[i - 1]) {
+      const randomIndex = Math.floor(Math.random() * imgs.length);
+
+      document.getElementById("dices" + i).src = imgs[randomIndex];
+      diceValues[i - 1] = randomIndex + 1;
+    } else {
+      document.getElementById("dices" + i).src =
+        "imgs/dices" + heldDiceValues[i - 1] + ".png";
+    }
   }
 }
