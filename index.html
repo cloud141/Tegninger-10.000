@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=$, initial-scale=1.0" />
     <script></script>
     <link rel="stylesheet" href="main.css" />
-    <title>Teninger</title>
+    <script src="java/ja.js"></script>
+    <title>10.000 spillet</title>
   </head>
   <body>
     <!-- playboad -->
@@ -22,7 +23,12 @@
         </div>
         <!-- dices -->
         <div class="dicesDiv" id="dicesId">
-          <img src="imgs/dices.png" width="300" height="200" alt="dices" />
+          <img id="dices1" src="imgs/dices1.png" alt="dices" />
+          <img id="dices2" src="imgs/dices1.png" alt="dices" />
+          <img id="dices3" src="imgs/dices1.png" alt="dices" />
+          <img id="dices4" src="imgs/dices1.png" alt="dices" />
+          <img id="dices5" src="imgs/dices1.png" alt="dices" />
+          <img id="dices6" src="imgs/dices1.png" alt="dices" />
         </div>
       </div>
       <div class="scoreboard">
@@ -32,9 +38,9 @@
     </div>
     <div class="buttons">
       <button>Rules</button>
-      <button>start game</button>
-      <button>add player</button>
-      <button>delete player</button>
+      <button onclick="rulTerning()">Start game</button>
+      <button>Add player</button>
+      <button>Delete player</button>
     </div>
   </body>
 </html>
