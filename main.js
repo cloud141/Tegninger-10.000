@@ -34,6 +34,24 @@ function addScore() {
     }   
 }
 
+let diceOnHold = [false, false, false, false, false, false];
+let diceValues = [0, 0, 0, 0, 0, 0];
+// var totalScore;
+// var roundScore = 0;
+
+function TriggerOnOfHold(dice) {
+  let diceNumber = parseInt(dice.id.replace("dice", "")) - 1;
+  //   diceOnHold.push(dice.id);
+
+  if (diceOnHold[diceNumber]) {
+    dice.style.opacity = "1";
+    diceOnHold[diceNumber] = false;
+  } else {
+    dice.style.opacity = "0.2";
+    diceOnHold[diceNumber] = true;
+  }
+}
+
 function rulTerning() {
 
     const imgs = [
@@ -54,30 +72,3 @@ function rulTerning() {
     }
 
 }
-
-let diceOnHold = [false, false, false, false, false, false];
-let diceValues = [0, 0, 0, 0, 0, 0];
-// var totalScore;
-// var roundScore = 0;
-triggerNextRound = true;
-
-function TriggerOnOfHold(dice) {
-  if (triggerNextRound) {
-    return;
-  }
-
-  let diceNumber = parseInt(dice.id.replace("dices1", "")) - 1;
-
-  if (diceOnHold[diceNumber]) {
-    dice.style.opacity = "1";
-    diceOnHold[diceNumber] = false;
-  } else {
-    dice.style.opacity = "0.2";
-    diceOnHold[diceNumber] = true;
-  }
-}
-
-// function calculateCurrentScore() {
-//   roundScore + totalScore;
-// }
-
