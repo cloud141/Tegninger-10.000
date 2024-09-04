@@ -87,7 +87,6 @@ function displayCurrentPlayer() {
 }
 
 // Funktion til at tilføje score til den nuværende spiller
-
 function addScore() {
   const diceScore = parseInt(document.getElementById("score").innerText, 10) || 0;
   const currentPlayer = playersAdded[currentPlayerIndex];
@@ -113,7 +112,7 @@ function nextPlayer() {
 }
 
 // Event listener for at tilføje score ved klik
-//document.getElementById("addScoreButton").addEventListener("click", addScore);
+document.getElementById("addScoreButton").addEventListener("click", addScore);
 
 // Initial display, hvis spillere allerede er tilføjet
 if (playersAdded.length > 0) {
