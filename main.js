@@ -1,3 +1,27 @@
+const playersAdded = [];
+
+function addPlayers() {
+  const players = document.getElementById('playerId').value.trim();
+  playersAdded.push(players);
+  document.getElementById('display').innerText += players + '\n';
+  document.getElementById("playerId").value = "";
+}
+
+function deletePlayer() {
+  const players = document.getElementById('playerId').value.trim();
+
+  if (players !== "") {
+    const index = playersAdded.indexOf(players);
+
+    if (index > -1) {
+      playersAdded.splice(index, 1);
+      document.getElementById('display').innerText = playersAdded.join('\n');
+    }
+
+    document.getElementById("playerId").value = "";
+  }
+}
+
 element.addEventListener("click, addScore()");
 
 function addScore() {
@@ -30,3 +54,30 @@ function rulTerning() {
     }
 
 }
+
+let diceOnHold = [false, false, false, false, false, false];
+let diceValues = [0, 0, 0, 0, 0, 0];
+// var totalScore;
+// var roundScore = 0;
+triggerNextRound = true;
+
+function TriggerOnOfHold(dice) {
+  if (triggerNextRound) {
+    return;
+  }
+
+  let diceNumber = parseInt(dice.id.replace("dices1", "")) - 1;
+
+  if (diceOnHold[diceNumber]) {
+    dice.style.opacity = "1";
+    diceOnHold[diceNumber] = false;
+  } else {
+    dice.style.opacity = "0.2";
+    diceOnHold[diceNumber] = true;
+  }
+}
+
+// function calculateCurrentScore() {
+//   roundScore + totalScore;
+// }
+

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=$, initial-scale=1.0" />
     <script></script>
     <link rel="stylesheet" href="main.css" />
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <title>10.000 spillet</title>
   </head>
   <body>
@@ -23,7 +23,7 @@
         </div>
         <!-- dices -->
         <div class="dicesDiv" id="dicesId">
-          <img id="dices1" src="imgs/dices1.png" alt="dices" />
+          <img id="dices1" onclick="TriggerOnOfHold()" src="imgs/dices1.png" alt="dices" />
           <img id="dices2" src="imgs/dices1.png" alt="dices" />
           <img id="dices3" src="imgs/dices1.png" alt="dices" />
           <img id="dices4" src="imgs/dices1.png" alt="dices" />
@@ -33,14 +33,19 @@
       </div>
       <div class="scoreboard">
         Score
-        <div id="playerName"></div>
+        <div id="display">
       </div>
-    </div>
-    <div class="buttons">
-      <button>Rules</button>
-      <button onclick="rulTerning()">Start game</button>
-      <button>Add player</button>
-      <button>Delete player</button>
+          <div id="playerName"></div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button>Rules</button>
+        <button onclick="rulTerning()">Start game</button>
+        <button onclick="addPlayers()">Add player</button>
+        <button onclick="deletePlayer()">Delete player</button>
+      </div>
+      <label>Name:</label>
+      <input type="text" id="playerId" />
     </div>
   </body>
 </html>
