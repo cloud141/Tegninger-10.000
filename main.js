@@ -88,23 +88,23 @@ function displayCurrentPlayer() {
 
 // Funktion til at tilføje score til den nuværende spiller
 
-// function addScore() {
-//   const diceScore = parseInt(document.getElementById("score").innerText, 10) || 0;
-//   const currentPlayer = playersAdded[currentPlayerIndex];
+function addScore() {
+  const diceScore = parseInt(document.getElementById("score").innerText, 10) || 0;
+  const currentPlayer = playersAdded[currentPlayerIndex];
 
-//   if (diceScore + currentPlayer.score < 1000) {
-//     currentPlayer.score += diceScore;
-//   } else {
-//     currentPlayer.score = 1000; // eller en anden maks. værdi
-//   }
+  if (diceScore + currentPlayer.score < 1000) {
+    currentPlayer.score += diceScore;
+  } else {
+    currentPlayer.score = 1000; // eller en anden maks. værdi
+  }
 
-//   // Reset terningernes hold og score
-//   diceOnHold = [false, false, false, false, false, false];
-//   document.getElementById("score").innerText = "0";
+  // Reset terningernes hold og score
+  diceOnHold = [false, false, false, false, false, false];
+  document.getElementById("score").innerText = "0";
 
-//   // Skift til næste spiller
-//   nextPlayer();
-// }
+  // Skift til næste spiller
+  nextPlayer();
+}
 
 // Funktion til at skifte til næste spiller
 function nextPlayer() {
