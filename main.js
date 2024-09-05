@@ -1,7 +1,7 @@
 const playersAdded = [];
 const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
-let heldDiceValues = ["", "", "", "", "", ""];
+let heldDiceValues = [];
 let gameStarted = false; //state to handle if game is started or not
 let currentScore = 0;
 
@@ -74,6 +74,7 @@ function rerollAllDice() {
         "imgs/dices" + heldDiceValues[i - 1] + ".png";
     }
   }
+  checkForPoints();
 }
 
 function rulTerning() {
@@ -81,6 +82,16 @@ function rulTerning() {
   // document.getElementById("dices" + i).src = imgs[randomIndex];
   console.table(heldDiceValues);
   rerollAllDice();
+}
+
+function checkForPoints() {
+  let currentRound = "";
+  let diceHoldOnSort = heldDiceValues.sort();
+  diceHoldOnSort.reverse();
+  let diceHoldOnString = diceHoldOnSort.toString();
+  if (diceHoldOnString == "1,2,3,4,5,6") currentRound += 1000;
+  if (diceHoldOnString == "1") currentRound += 100;
+  console.log(currentRound);
 }
 
 function addPlayers() {
