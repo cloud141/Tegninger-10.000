@@ -85,12 +85,10 @@ function rulTerning() {
 }
 
 function checkForPoints() {
-  let currentRound = "";
-  let diceHoldOnSort = heldDiceValues.sort();
-  diceHoldOnSort.reverse();
-  let diceHoldOnString = diceHoldOnSort.toString();
-  if (diceHoldOnString == "1,2,3,4,5,6") currentRound += 1000;
-  if (diceHoldOnString == "1") currentRound += 100;
+  let currentRound = 0;
+  [heldDiceValues].sort((a, b) => a - b);
+  if (heldDiceValues.includes(1,2,3,4,5,6)) currentRound += 1000;
+  if (heldDiceValues.includes(1)) currentRound += 100;
   console.log(currentRound);
 }
 
