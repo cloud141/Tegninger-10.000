@@ -2,6 +2,7 @@ const playersAdded = [];
 const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
 let heldDiceValues = [];
+let totalDiceValueArray = [];
 let gameStarted = false; //state to handle if game is started or not
 let currentScore = 0;
 
@@ -17,16 +18,20 @@ function TriggerOnOfHold(dice) {
     dice.style.opacity = "1";
     diceOnHold[diceNumber] = false;
     heldDiceValues[diceNumber] = null;
+    totalDiceValueArray.pop(diceNumber); 
   } else {
     dice.style.opacity = "0.2";
     diceOnHold[diceNumber] = true;
     heldDiceValues[diceNumber] = diceValues[diceNumber];
+    totalDiceValueArray.push(diceValues[diceNumber]);
   }
-
+  console.log(totalDiceValueArray.concat());
+  checkForPoints();
   if (diceOnHold.every((held) => held)) {
     setTimeout(resetDiceHold, 1000);
   }
 }
+
 
 function resetDiceHold() {
   for (let i = 0; i < 6; i++) {
@@ -74,7 +79,6 @@ function rerollAllDice() {
         "imgs/dices" + heldDiceValues[i - 1] + ".png";
     }
   }
-  checkForPoints();
 }
 
 function rulTerning() {
@@ -86,9 +90,10 @@ function rulTerning() {
 
 function checkForPoints() {
   let currentRound = 0;
-  [heldDiceValues].sort((a, b) => a - b);
-  if (heldDiceValues.includes(1,2,3,4,5,6)) currentRound += 1000;
-  if (heldDiceValues.includes(1)) currentRound += 100;
+  let stringedValues = totalDiceValueArray.sort();
+  let sortedValues = stringedValues.toString();
+  if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
+  else if (sortedValues === "1") currentRound += 100;
   console.log(currentRound);
 }
 
