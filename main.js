@@ -115,12 +115,3 @@ function deletePlayer() {
     document.getElementById("playerId").value = "";
   }
 }
-
-function addScore() {
-  let diceScore = document.getElementById("score");
-  if (diceScore + currentScore < 1000) {
-    currentScore = 0;
-  } else {
-    currentScore = diceScore + currentScore;
-  }
-}
