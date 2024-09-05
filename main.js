@@ -35,7 +35,6 @@ function deletePlayer() {
   }
 }
 
-let diceStats=[];
 
 function rulTerning() {
     const imgs = [
@@ -47,20 +46,17 @@ function rulTerning() {
         "imgs/dices6.png",
   ];
 
-  diceStats = [];
-
   for (let i = 1; i <= 6; i++) {
       const randomIndex = Math.floor(Math.random() * imgs.length);
       
       document.getElementById("dices" + i).src = imgs[randomIndex];
     }
-    diceStats.push(randomIndex);
+
 }
 
-console.log(diceStats);
+
 
 // element.addEventListener("click, addScore()");
-
 // function addScore() {
 //   let diceScore = document.getElementById("score");
 //   if (diceScore + currentScore < 1000) {
