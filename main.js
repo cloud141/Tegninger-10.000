@@ -98,6 +98,11 @@ function checkForPoints() {
   let sortedValues = stringedValues.toString();
   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
   else if (sortedValues === "1") currentRound += 100;
+  else if (sortedValues === "1,1") currentRound += 200;
+  else if (sortedValues === "1,1,1") currentRound += 1000;
+  else if (sortedValues === "1,1,1,1") currentRound += 2000;
+  else if (sortedValues === "1,1,1,1,1") currentRound += 4000;
+  else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
   console.log(currentRound);
 }
 
