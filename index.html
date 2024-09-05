@@ -50,12 +50,19 @@
           <div id="playerName"></div>
         </div>
       </div>
-      <div class="buttons">
+      <!-- <div class="buttons">
         <button>Rules</button>
         <button onclick="rulTerning()">Start game</button>
         <button onclick="addPlayers()">Add player</button>
         <button onclick="deletePlayer()">Delete player</button>
+      </div> -->
+      <div class="buttons">
+        <button>Rules</button>
+        <button id="startBtn" onclick="startGame()">Start Game</button>
+        <button onclick="addPlayers()">Add Player</button>
+        <button onclick="deletePlayer()">Delete Player</button>
       </div>
+
       <label>Name:</label>
       <input type="text" id="playerId" />
     </div>

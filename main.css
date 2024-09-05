@@ -33,3 +33,6 @@
   margin: 0 50px 0 50px;
   justify-content: space-evenly;
 }
+.startBtn {
+  cursor: pointer;
+}

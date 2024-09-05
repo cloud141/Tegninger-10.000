@@ -2,8 +2,15 @@ const playersAdded = [];
 const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
 let heldDiceValues = ["", "", "", "", "", ""];
+let gameStarted = true; //state to handle if game is started or not
+let currentScore = 0;
 
 function TriggerOnOfHold(dice) {
+  if (gameStarted) {
+    alert("You need to start the game first!");
+    return;
+  }
+
   let diceNumber = parseInt(dice.id.replace("dice", "")) - 1;
 
   if (diceOnHold[diceNumber]) {
@@ -29,6 +36,13 @@ function resetDiceHold() {
   rerollAllDice();
 }
 
+function startGame() {
+  gameStarted = true;
+  rerollAllDice();
+  document.getElementById("startBtn").innerText = "Roll Again";
+  document.getElementById("startBtn").onclick = rulTerning;
+}
+
 function rerollAllDice() {
   const imgs = [
     "imgs/dices1.png",
@@ -38,13 +52,34 @@ function rerollAllDice() {
     "imgs/dices5.png",
     "imgs/dices6.png",
   ];
+  // console.table(heldDiceValues);
+  // for (let i = 1; i <= 6; i++) {
+  //   if (!diceOnHold[i - 1]) {
+  //     const randomIndex = Math.floor(Math.random() * imgs.length);
+  //     document.getElementById("dices" + i).src = imgs[randomIndex];
+  //     diceValues[i - 1] = randomIndex + 1;
+  //     heldDiceValues[i - 1] = diceValues[i - 1];
+  //   }
+  // }
 
+  console.table(heldDiceValues);
   for (let i = 1; i <= 6; i++) {
-    const randomIndex = Math.floor(Math.random() * imgs.length);
-    document.getElementById("dices" + i).src = imgs[randomIndex];
-    diceValues[i - 1] = randomIndex + 1;
-    heldDiceValues[i - 1] = diceValues[i - 1];
+    if (!diceOnHold[i - 1]) {
+      const randomIndex = Math.floor(Math.random() * imgs.length);
+
+      document.getElementById("dices" + i).src = imgs[randomIndex];
+      diceValues[i - 1] = randomIndex + 1;
+    } else {
+      document.getElementById("dices" + i).src =
+        "imgs/dices" + heldDiceValues[i - 1] + ".png";
+    }
   }
+}
+
+function rulTerning() {
+  // const randomIndex = Math.floor(Math.random() * imgs.length);
+  // document.getElementById("dices" + i).src = imgs[randomIndex];
+  rerollAllDice();
 }
 
 function addPlayers() {
@@ -77,32 +112,5 @@ function addScore() {
     currentScore = 0;
   } else {
     currentScore = diceScore + currentScore;
-  }
-}
-
-function rulTerning() {
-  const imgs = [
-    "imgs/dices1.png",
-    "imgs/dices2.png",
-    "imgs/dices3.png",
-    "imgs/dices4.png",
-    "imgs/dices5.png",
-    "imgs/dices6.png",
-  ];
-  console.table(heldDiceValues);
-  for (let i = 1; i <= 6; i++) {
-    // const randomIndex = Math.floor(Math.random() * imgs.length);
-
-    // document.getElementById("dices" + i).src = imgs[randomIndex];
-
-    if (!diceOnHold[i - 1]) {
-      const randomIndex = Math.floor(Math.random() * imgs.length);
-
-      document.getElementById("dices" + i).src = imgs[randomIndex];
-      diceValues[i - 1] = randomIndex + 1;
-    } else {
-      document.getElementById("dices" + i).src =
-        "imgs/dices" + heldDiceValues[i - 1] + ".png";
-    }
   }
 }
