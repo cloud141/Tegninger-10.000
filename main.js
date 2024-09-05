@@ -18,7 +18,12 @@ function TriggerOnOfHold(dice) {
     dice.style.opacity = "1";
     diceOnHold[diceNumber] = false;
     heldDiceValues[diceNumber] = null;
-    totalDiceValueArray.pop(diceNumber); 
+
+    // klik til og fra af terning
+    let indexToRemove = totalDiceValueArray.indexOf(diceValues[diceNumber]);
+    if (indexToRemove !== -1) {
+      totalDiceValueArray.splice(indexToRemove, 1);
+    }
   } else {
     dice.style.opacity = "0.2";
     diceOnHold[diceNumber] = true;
@@ -31,7 +36,6 @@ function TriggerOnOfHold(dice) {
     setTimeout(resetDiceHold, 1000);
   }
 }
-
 
 function resetDiceHold() {
   for (let i = 0; i < 6; i++) {
