@@ -2,11 +2,11 @@ const playersAdded = [];
 const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
 let heldDiceValues = ["", "", "", "", "", ""];
-let gameStarted = true; //state to handle if game is started or not
+let gameStarted = false; //state to handle if game is started or not
 let currentScore = 0;
 
 function TriggerOnOfHold(dice) {
-  if (gameStarted) {
+  if (!gameStarted) {
     alert("You need to start the game first!");
     return;
   }
