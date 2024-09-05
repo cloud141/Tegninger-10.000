@@ -55,7 +55,7 @@ body {
 }
 
 .scoreboard {
-  background-color: #ff69b4;
+  background-color: deeppink;
   border-radius: 15px;
   padding: 20px;
   color: white;
@@ -75,14 +75,16 @@ body {
 
 button {
   padding: 10px 20px;
-  background-color: #ff69b4;
+  background-color: deeppink;
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
 }
 
 button:hover {
-  background-color: #efb5d4;
+  background-color: rgb(255, 193, 226);
+  color: black;
 }

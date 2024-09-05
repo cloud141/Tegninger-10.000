@@ -116,8 +116,6 @@ function deletePlayer() {
   }
 }
 
-element.addEventListener("click, addScore()");
-
 function addScore() {
   let diceScore = document.getElementById("score");
   if (diceScore + currentScore < 1000) {
