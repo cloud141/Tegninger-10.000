@@ -92,6 +92,8 @@ function rulTerning() {
   rerollAllDice();
 }
 
+
+
 function checkForPoints() {
   let currentRound = 0;
   let stringedValues = totalDiceValueArray.sort();
@@ -99,6 +101,10 @@ function checkForPoints() {
   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
   else if (sortedValues === "1") currentRound += 100;
   else if (sortedValues === "1,1") currentRound += 200;
+  else if (sortedValues === "1,1,1") currentRound += 1000;
+  else if (sortedValues === "1,1,1,1") currentRound += 2000;
+  else if (sortedValues === "1,1,1,1,1") currentRound += 4000;
+  else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
   else if (sortedValues === "5") currentRound += 50;
   else if (sortedValues === "5,5") currentRound += 100;
 
