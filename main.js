@@ -102,6 +102,14 @@ function rulTerning() {
 }
 
 function endTurn() {
+  
+  let currentRound = checkForPoints();
+    totalDiceValueArray = [];
+    currentPoints += currentRound;
+    currentRound = 0;
+    document.getElementById('roundScore').innerHTML = currentPoints;
+    document.getElementById('currentPoints').innerHTML = currentRound;
+
   if(currentPoints >= 1000) {
     score += currentPoints;
     document.getElementById('score').innerHTML = score;
