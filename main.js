@@ -92,25 +92,88 @@ function rulTerning() {
   rerollAllDice();
 }
 
+function checkForPoints(){
 
-
-function checkForPoints() {
   let currentRound = 0;
-  let stringedValues = totalDiceValueArray.sort();
-  let sortedValues = stringedValues.toString();
-  if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
-  else if (sortedValues === "1") currentRound += 100;
-  else if (sortedValues === "1,1") currentRound += 200;
-  else if (sortedValues === "1,1,1") currentRound += 1000;
-  else if (sortedValues === "1,1,1,1") currentRound += 2000;
-  else if (sortedValues === "1,1,1,1,1") currentRound += 4000;
-  else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
-  else if (sortedValues === "5") currentRound += 50;
-  else if (sortedValues === "5,5") currentRound += 100;
 
+  let chosenOnes = totalDiceValueArray.filter(function(dice) {
+    return dice === 1;
+  }).length;
 
-  console.log(currentRound);
+  let chosenTwos = totalDiceValueArray.filter(function(dice) {
+    return dice === 2;
+  }).length;
+
+  let chosenThrees = totalDiceValueArray.filter(function(dice) {
+    return dice === 3;
+  }).length;
+
+  let chosenFours = totalDiceValueArray.filter(function(dice) {
+    return dice === 4;
+  }).length;
+
+  let chosenFives = totalDiceValueArray.filter(function(dice) {
+    return dice === 5;
+  }).length;
+
+  let chosenSix = totalDiceValueArray.filter(function(dice) {
+    return dice === 6;
+  }).length;
+
+  
+  
+  switch (chosenOnes) {
+  case 1:
+    currentRound += 100;
+    break;
+    case 2:
+      currentRound += 200;
+      break;
+  case 3:
+    currentRound += 1000;
+    break;
+  case 4:
+    currentRound += 2000;
+    break;
+    case 5:
+      currentRound += 4000;
+      break;
+      case 6:
+      currentRound += 10000;
+      break;
 }
+
+switch (chosenFives) {
+  case 1:
+    currentRound += 50;
+    break;
+  case 2:
+    currentRound += 100;
+    break;
+}
+
+
+console.log(currentRound);
+}
+
+
+// function checkForPoints() {
+//   let currentRound = 0;
+//   let stringedValues = totalDiceValueArray.sort();
+//   let sortedValues = stringedValues.toString();
+//   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
+//   else if (sortedValues === "1") currentRound += 100;
+//   else if (sortedValues === "1,1") currentRound += 200;
+//   else if (sortedValues === "1,1,1") currentRound += 1000;
+//   else if (sortedValues === "1,1,1,1") currentRound += 2000;
+//   else if (sortedValues === "1,1,1,1,1") currentRound += 4000;
+//   else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
+//   else if (sortedValues === "5") currentRound += 50;
+//   else if (sortedValues === "5,5") currentRound += 100;
+
+
+//   console.log(currentRound);
+// }
 
 function addPlayers() {
   const players = document.getElementById("playerId").value.trim();
