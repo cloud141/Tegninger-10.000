@@ -102,7 +102,7 @@ function rulTerning() {
 }
 
 function endTurn() {
-  
+
   let currentRound = checkForPoints();
     totalDiceValueArray = [];
     currentPoints += currentRound;
@@ -149,7 +149,9 @@ function checkForPoints(){
     return dice === 6;
   }).length;
 
-  
+   let stringedValues = totalDiceValueArray.sort();
+    let sortedValues = stringedValues.toString();
+   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
   
   switch (chosenOnes) {
   case 1:
