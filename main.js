@@ -106,6 +106,10 @@ function endTurn() {
     score += currentPoints;
     document.getElementById('score').innerHTML = score;
   }
+  else if(score >= 1000) {
+    score += currentPoints;
+    document.getElementById('score').innerHTML = score;
+  }
   currentPoints = 0;
   resetDiceHold();
 }
