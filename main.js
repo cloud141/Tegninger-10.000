@@ -99,32 +99,9 @@ function checkForPoints() {
   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
   else if (sortedValues === "1") currentRound += 100;
   else if (sortedValues === "1,1") currentRound += 200;
-  else if (sortedValues === "1,1,1") currentRound += 1000;
-  else if (sortedValues === "1,1,1,1") currentRound += 2000;
-  else if (sortedValues === "1,1,1,1,1") currentRound += 4000;
-  else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
-  else if (sortedValues === "2,2,2") currentRound += 200;
-  else if (sortedValues === "2,2,2,2") currentRound += 400;
-  else if (sortedValues === "2,2,2,2,2") currentRound += 800;
-  else if (sortedValues === "2,2,2,2,2,2") currentRound += 1200;
-  else if (sortedValues === "3,3,3") currentRound += 300;
-  else if (sortedValues === "3,3,3,3") currentRound += 600;
-  else if (sortedValues === "3,3,3,3,3") currentRound += 1200;
-  else if (sortedValues === "3,3,3,3,3,3") currentRound += 2400;
-  else if (sortedValues === "4,4,4") currentRound += 400;
-  else if (sortedValues === "4,4,4,4") currentRound += 800;
-  else if (sortedValues === "4,4,4,4,4") currentRound += 1600;
-  else if (sortedValues === "4,4,4,4,4,4") currentRound += 3200;
   else if (sortedValues === "5") currentRound += 50;
-  else if (sortedValues === "5,5,") currentRound += 100;
-  else if (sortedValues === "5,5,5") currentRound += 500;
-  else if (sortedValues === "5,5,5,5") currentRound += 1000;
-  else if (sortedValues === "5,5,5,5,5") currentRound += 2000;
-  else if (sortedValues === "5,5,5,5,5,5") currentRound += 4000;
-  else if (sortedValues === "6,6,6,") currentRound += 600;
-  else if (sortedValues === "6,6,6,6") currentRound += 1200;
-  else if (sortedValues === "6,6,6,6,6") currentRound += 2400;
-  else if (sortedValues === "6,6,6,6,6,6") currentRound += 4800;
+  else if (sortedValues === "5,5") currentRound += 100;
+
 
   console.log(currentRound);
 }
