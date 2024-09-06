@@ -1,12 +1,13 @@
 const playersAdded = [];
-const playerScores = {}; // Object to store scores for each player
 const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
 let heldDiceValues = [];
 let totalDiceValueArray = [];
-let gameStarted = false; // state to handle if game is started or not
+let gameStarted = false;
 let currentScore = 0;
-let currentPlayerIndex = 0; // Keep track of which player's turn it is
+let playerScores = [];
+let currentPlayer = 0; // Track the current player
+const winningScore = 10000; // Winning score is 10,000 points
 
 function TriggerOnOfHold(dice) {
   if (!gameStarted) {
@@ -31,10 +32,8 @@ function TriggerOnOfHold(dice) {
     heldDiceValues[diceNumber] = diceValues[diceNumber];
     totalDiceValueArray.push(diceValues[diceNumber]);
   }
+  console.log(totalDiceValueArray.concat());
   checkForPoints();
-  if (diceOnHold.every((held) => held)) {
-    setTimeout(resetDiceHold, 1000);
-  }
 }
 
 function resetDiceHold() {
@@ -47,9 +46,12 @@ function resetDiceHold() {
 
 function startGame() {
   gameStarted = true;
+  playerScores = new Array(playersAdded.length).fill(0);
+  currentPlayer = 0; // Reset to first player
   rerollAllDice();
   document.getElementById("startBtn").innerText = "Roll Again";
   document.getElementById("startBtn").onclick = rulTerning;
+  updateScoreDisplay();
 }
 
 function rerollAllDice() {
@@ -61,7 +63,6 @@ function rerollAllDice() {
     "imgs/dices5.png",
     "imgs/dices6.png",
   ];
-
   for (let i = 1; i <= 6; i++) {
     if (!diceOnHold[i - 1]) {
       const randomIndex = Math.floor(Math.random() * imgs.length);
@@ -76,63 +77,81 @@ function rerollAllDice() {
 
 function rulTerning() {
   rerollAllDice();
+  checkForPoints();
 }
 
 function checkForPoints() {
   let currentRound = 0;
   let stringedValues = totalDiceValueArray.sort();
   let sortedValues = stringedValues.toString();
-  
-  // Your point-checking logic (e.g. matching combinations)
-  // (Same as before)
-  
-  console.log(currentRound);
-  
-  // Update the current player's score
-  const currentPlayer = playersAdded[currentPlayerIndex];
-  playerScores[currentPlayer] += currentRound;
-  
-  // Display the updated score
-  document.getElementById("scoreDisplay").innerText = 
-    playersAdded.map(player => `${player}: ${playerScores[player]} points`).join("\n");
 
-  // Check if current player has reached the winning score
-  if (playerScores[currentPlayer] >= 10000) {
-    alert(`${currentPlayer} wins with ${playerScores[currentPlayer]} points!`);
+  // Scoring logic based on 10,000 rules
+  if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
+  else if (sortedValues === "1") currentRound += 100;
+  else if (sortedValues === "5") currentRound += 50;
+  else if (sortedValues === "1,1,1") currentRound += 1000;
+  else if (sortedValues === "2,2,2") currentRound += 200;
+  else if (sortedValues === "3,3,3") currentRound += 300;
+  else if (sortedValues === "4,4,4") currentRound += 400;
+  else if (sortedValues === "5,5,5") currentRound += 500;
+  else if (sortedValues === "6,6,6") currentRound += 600;
+
+  currentScore = currentRound;
+  updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+  document.getElementById("display").innerText =
+    "Current player: " + playersAdded[currentPlayer] + "\n" +
+    "Current score: " + currentScore + "\n" +
+    "Total scores: " + playerScores.map((score, index) => `${playersAdded[index]}: ${score}`).join("\n");
+}
+
+function bankPoints() {
+  playerScores[currentPlayer] += currentScore;
+  currentScore = 0;
+
+  if (playerScores[currentPlayer] >= winningScore) {
+    alert(playersAdded[currentPlayer] + " has won with " + playerScores[currentPlayer] + " points!");
     resetGame();
-  } else {
-    // Move to the next player's turn
-    currentPlayerIndex = (currentPlayerIndex + 1) % playersAdded.length;
-    alert(`Next player's turn: ${playersAdded[currentPlayerIndex]}`);
+    return;
   }
+
+  nextPlayer();
 }
 
-function addPlayers() {
-  const players = document.getElementById("playerId").value.trim();
-  playersAdded.push(players);
-  playerScores[players] = 0; // Initialize player score to 0
-  document.getElementById("display").innerText += players + "\n";
-  document.getElementById("playerId").value = "";
-}
-
-function deletePlayer() {
-  const players = document.getElementById("playerId").value.trim();
-  const index = playersAdded.indexOf(players);
-  if (index > -1) {
-    playersAdded.splice(index, 1);
-    delete playerScores[players]; // Remove player from scores
-    document.getElementById("display").innerText = playersAdded.join("\n");
-  }
-  document.getElementById("playerId").value = "";
+function nextPlayer() {
+  currentPlayer = (currentPlayer + 1) % playersAdded.length;
+  resetDiceHold();
+  updateScoreDisplay();
 }
 
 function resetGame() {
   gameStarted = false;
-  currentPlayerIndex = 0;
-  for (let player in playerScores) {
-    playerScores[player] = 0;
-  }
+  playerScores = [];
+  currentPlayer = 0;
   document.getElementById("startBtn").innerText = "Start Game";
-  document.getElementById("scoreDisplay").innerText = "";
+  document.getElementById("display").innerText = "";
   rerollAllDice();
+}
+
+function addPlayers() {
+  const player = document.getElementById("playerId").value.trim();
+  if (player) {
+    playersAdded.push(player);
+    document.getElementById("display").innerText += player + "\n";
+    document.getElementById("playerId").value = "";
+  }
+}
+
+function deletePlayer() {
+  const player = document.getElementById("playerId").value.trim();
+  if (player) {
+    const index = playersAdded.indexOf(player);
+    if (index > -1) {
+      playersAdded.splice(index, 1);
+      document.getElementById("display").innerText = playersAdded.join("\n");
+    }
+    document.getElementById("playerId").value = "";
+  }
 }

@@ -1,36 +1,90 @@
+body {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.gameboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px darkgray;
+}
+
 .playboardDiv {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.playboardImg {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 .dicesDiv {
+  gap: 4px;
   position: absolute;
   display: flex;
-  align-items: center;
   justify-content: center;
+}
+
+.dicesImg {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
 }
 
 .scoreboard {
   background-color: deeppink;
-  border-radius: 10px;
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  text-align: center;
   width: 200px;
 }
 
-.playboardImg {
-  width: 400px;
-}
-.dicesDiv img {
-  width: 40px;
+.scoreboard h2 {
+  margin: 0;
+  font-size: 24px;
 }
 
-.dicecontent {
+.buttons {
   display: flex;
+  gap: 15px;
 }
 
-.gameandboard{
-  display: flex;
-  margin: 0 50px 0 50px;
-  justify-content: space-evenly;
+button {
+  padding: 10px 20px;
+  background-color: deeppink;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
 
+button:hover {
+  background-color: rgb(255, 193, 226);
+  color: black;
 }
