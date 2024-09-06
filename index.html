@@ -1,75 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
- <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=$, initial-scale=1.0" />
-   <script></script>
-   <link rel="stylesheet" href="main.css" />
-   <script src="main.js" defer></script>
-   <title>10.000 spillet</title>
- </head>
- <body>
-
-  <div id="currentPlayerDisplay">Players turn: Ingen</div>
-
-   <!-- playboad -->
-   <div class="gameandboard">
-     <div class="dicecontent">
-       <div class="playboardDiv" id="playgroundId">
-         <img
-           class="playboardImg"
-           src="imgs/gameTable.jpg"
-           width="300"
-           height="300"
-           alt="playboard"
-         />
-       </div>
-       <!-- dices -->
-       <div class="dicesDiv" id="dicesId">
-         <div id="dice1" onclick="TriggerOnOfHold(this)" class="dice1">
-           <img id="dices1" src="imgs/dices1.png" alt="dices" />
-         </div>
-         <div id="dice2" onclick="TriggerOnOfHold(this)" class="dice2">
-           <img id="dices2" src="imgs/dices2.png" alt="dices" />
-         </div>
-         <div id="dice3" onclick="TriggerOnOfHold(this)" class="dice">
-           <img id="dices3" src="imgs/dices3.png" alt="dices" />
-         </div>
-         <div id="dice4" onclick="TriggerOnOfHold(this)" class="dice">
-           <img id="dices4" src="imgs/dices4.png" alt="dices" />
-         </div>
-         <div id="dice5" onclick="TriggerOnOfHold(this)" class="dice">
-           <img id="dices5" src="imgs/dices5.png" alt="dices" />
-         </div>
-         <div id="dice6" onclick="TriggerOnOfHold(this)" class="dice">
-           <img id="dices6" src="imgs/dices6.png" alt="dices" />
-         </div>
-       </div>
-     </div>
-     <div class="scoreboard">
-       Score
-       <div id="display">
-     </div>
-         <div id="playerName"></div>
-       </div>
-     </div>
-     <div class="buttons">
-       <button>Rules</button>
-       <button onclick="rulTerning()">Rul terninger</button>
-       <button onclick="nextPlayer()">End turn</button>
-       <button onclick="addPlayers()">Add player</button>
-       <button onclick="deletePlayer()">Delete player</button>
-     </div>
-     <label>Name:</label>
-     <input type="text" id="playerId" />
-   </div>
- </body>
-</html>
-=======
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=$, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script></script>
     <link rel="stylesheet" href="main.css" />
     <script src="main.js" defer></script>
@@ -77,7 +10,6 @@
   </head>
   <body>
     <div class="container">
-      <div id="currentPlayerDisplay">Players turn: Ingen</div>
       <div class="gameboard">
         <div class="playboardDiv" id="playgroundId">
           <img class="playboardImg" src="imgs/gameTable.jpg" alt="playboard" />
@@ -135,11 +67,14 @@
       </div>
 
       <div class="scoreboard">
-        Score
+        <h3>Scoreboard</h3>
         <div id="display"></div>
+        <h3>Current Scores</h3>
+        <div id="scoreDisplay"></div> <!-- Added for displaying scores -->
         <div id="playerName"></div>
       </div>
     </div>
+
     <div class="buttons">
       <button>Rules</button>
       <button class="startBtn" id="startBtn" onclick="startGame()">
@@ -147,10 +82,9 @@
       </button>
       <button onclick="addPlayers()">Add player</button>
       <button onclick="deletePlayer()">Delete player</button>
-      <button onclick="nextPlayer()">End turn</button>
     </div>
-    <label>Name:</label>
+
+    <label for="playerId">Name:</label>
     <input type="text" id="playerId" />
   </body>
 </html>
->>>>>>> Stashed changes

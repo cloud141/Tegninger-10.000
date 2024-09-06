@@ -1,27 +1,24 @@
 const playersAdded = [];
-let currentPlayerIndex = 0;
-
+const playerScores = {}; // Object to store scores for each player
+const diceValues = [1, 2, 3, 4, 5, 6];
 let diceOnHold = [false, false, false, false, false, false];
-<<<<<<< Updated upstream
-=======
 let heldDiceValues = [];
 let totalDiceValueArray = [];
-let gameStarted = false;
+let gameStarted = false; // state to handle if game is started or not
 let currentScore = 0;
-let currentPlayerIndex = 0;
->>>>>>> Stashed changes
+let currentPlayerIndex = 0; // Keep track of which player's turn it is
 
 function TriggerOnOfHold(dice) {
+  if (!gameStarted) {
+    alert("You need to start the game first!");
+    return;
+  }
+
   let diceNumber = parseInt(dice.id.replace("dice", "")) - 1;
 
   if (diceOnHold[diceNumber]) {
     dice.style.opacity = "1";
     diceOnHold[diceNumber] = false;
-<<<<<<< Updated upstream
-  } else {
-    dice.style.opacity = "0.2";
-    diceOnHold[diceNumber] = true;
-=======
     heldDiceValues[diceNumber] = null;
 
     let indexToRemove = totalDiceValueArray.indexOf(diceValues[diceNumber]);
@@ -34,63 +31,28 @@ function TriggerOnOfHold(dice) {
     heldDiceValues[diceNumber] = diceValues[diceNumber];
     totalDiceValueArray.push(diceValues[diceNumber]);
   }
-
   checkForPoints();
   if (diceOnHold.every((held) => held)) {
     setTimeout(resetDiceHold, 1000);
->>>>>>> Stashed changes
   }
 }
 
-// Funktion til at generere unikt ID
-function generateUniqueId() {
-  return 'player-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-}
-
-// Funktion til at tilføje en spiller med et unikt ID og score
-function addPlayers() {
-  const playerName = document.getElementById("playerId").value.trim();
-  if (playerName) {
-    const newPlayer = {
-      id: generateUniqueId(),
-      name: playerName,
-      score: 0,
-    };
-    playersAdded.push(newPlayer);
-    document.getElementById("display").innerText += newPlayer.name + "\n";
-    document.getElementById("playerId").value = "";
-    
-    // Opdater nuværende spiller, hvis det er den første spiller
-    if (playersAdded.length === 1) {
-      displayCurrentPlayer();
-    }
+function resetDiceHold() {
+  for (let i = 0; i < 6; i++) {
+    diceOnHold[i] = false;
+    document.getElementById("dice" + (i + 1)).style.opacity = "1";
   }
+  rerollAllDice();
 }
 
-// Funktion til at slette en spiller
-function deletePlayer() {
-  const playerName = document.getElementById("playerId").value.trim();
-
-  if (playerName !== "") {
-    const index = playersAdded.findIndex(player => player.name === playerName);
-
-    if (index > -1) {
-      playersAdded.splice(index, 1);
-      document.getElementById("display").innerText = playersAdded.map(player => player.name).join("\n");
-
-      // Hvis den slettede spiller var den nuværende spiller, skift til den næste spiller
-      if (index === currentPlayerIndex) {
-        currentPlayerIndex = currentPlayerIndex % playersAdded.length;
-        displayCurrentPlayer();
-      }
-    }
-
-    document.getElementById("playerId").value = "";
-  }
+function startGame() {
+  gameStarted = true;
+  rerollAllDice();
+  document.getElementById("startBtn").innerText = "Roll Again";
+  document.getElementById("startBtn").onclick = rulTerning;
 }
 
-// Funktion til at rulle terningerne
-function rulTerning() {
+function rerollAllDice() {
   const imgs = [
     "imgs/dices1.png",
     "imgs/dices2.png",
@@ -101,29 +63,6 @@ function rulTerning() {
   ];
 
   for (let i = 1; i <= 6; i++) {
-<<<<<<< Updated upstream
-    const randomIndex = Math.floor(Math.random() * imgs.length);
-
-    document.getElementById("dices" + i).src = imgs[randomIndex];
-  }
-}
-
-// Funktion til at vise den nuværende spiller
-function displayCurrentPlayer() {
-  const currentPlayer = playersAdded[currentPlayerIndex];
-  document.getElementById("currentPlayerDisplay").innerText = `Nuværende spiller: ${currentPlayer.name}`;
-}
-
-// Funktion til at tilføje score til den nuværende spiller
-function addScore() {
-  const diceScore = parseInt(document.getElementById("score").innerText, 10) || 0;
-  const currentPlayer = playersAdded[currentPlayerIndex];
-
-  if (diceScore + currentPlayer.score < 1000) {
-    currentPlayer.score += diceScore;
-  } else {
-    currentPlayer.score = 1000; // eller en anden maks. værdi
-=======
     if (!diceOnHold[i - 1]) {
       const randomIndex = Math.floor(Math.random() * imgs.length);
       document.getElementById("dices" + i).src = imgs[randomIndex];
@@ -141,124 +80,59 @@ function rulTerning() {
 
 function checkForPoints() {
   let currentRound = 0;
-  let diceCount = {};  // Object to keep track of how many times each dice value appears
+  let stringedValues = totalDiceValueArray.sort();
+  let sortedValues = stringedValues.toString();
+  
+  // Your point-checking logic (e.g. matching combinations)
+  // (Same as before)
+  
+  console.log(currentRound);
+  
+  // Update the current player's score
+  const currentPlayer = playersAdded[currentPlayerIndex];
+  playerScores[currentPlayer] += currentRound;
+  
+  // Display the updated score
+  document.getElementById("scoreDisplay").innerText = 
+    playersAdded.map(player => `${player}: ${playerScores[player]} points`).join("\n");
 
-  // Count occurrences of each dice value
-  heldDiceValues.forEach((value) => {
-    if (value) {
-      diceCount[value] = (diceCount[value] || 0) + 1;
-    }
-  });
-
-  // Check for three 1's
-  if (diceCount[1] >= 3) {
-    currentRound += 1000;
-    diceCount[1] -= 3; // Remove the three 1's that gave 1000 points
+  // Check if current player has reached the winning score
+  if (playerScores[currentPlayer] >= 10000) {
+    alert(`${currentPlayer} wins with ${playerScores[currentPlayer]} points!`);
+    resetGame();
+  } else {
+    // Move to the next player's turn
+    currentPlayerIndex = (currentPlayerIndex + 1) % playersAdded.length;
+    alert(`Next player's turn: ${playersAdded[currentPlayerIndex]}`);
   }
-
-  // Give points for remaining 1's (if there are any left)
-  if (diceCount[1]) {
-    currentRound += diceCount[1] * 100;
-  }
-
-  // Check for three of other numbers (except 1's)
-  for (let i = 2; i <= 6; i++) {
-    if (diceCount[i] >= 3) {
-      currentRound += i * 100;  // Three of any other number gives the number * 100 points
-    }
-  }
-
-  console.log("Points for this round: " + currentRound);
-  currentScore += currentRound;
 }
 
 function addPlayers() {
-  const playerName = document.getElementById("playerId").value.trim();
-  if (playerName) {
-    const newPlayer = {
-      name: playerName,
-      score: 0,
-    };
-    playersAdded.push(newPlayer);
-    document.getElementById("display").innerText += newPlayer.name + "\n";
-    document.getElementById("playerId").value = "";
-
-    if (playersAdded.length === 1) {
-      displayCurrentPlayer();
-    }
-  }
+  const players = document.getElementById("playerId").value.trim();
+  playersAdded.push(players);
+  playerScores[players] = 0; // Initialize player score to 0
+  document.getElementById("display").innerText += players + "\n";
+  document.getElementById("playerId").value = "";
 }
 
 function deletePlayer() {
-  const playerName = document.getElementById("playerId").value.trim();
-
-  if (playerName !== "") {
-    const index = playersAdded.findIndex(player => player.name === playerName);
-
-    if (index > -1) {
-      playersAdded.splice(index, 1);
-      document.getElementById("display").innerText = playersAdded.map(player => player.name).join("\n");
-
-      if (index === currentPlayerIndex) {
-        currentPlayerIndex = currentPlayerIndex % playersAdded.length;
-        displayCurrentPlayer();
-      }
-    }
-
-    document.getElementById("playerId").value = "";
->>>>>>> Stashed changes
+  const players = document.getElementById("playerId").value.trim();
+  const index = playersAdded.indexOf(players);
+  if (index > -1) {
+    playersAdded.splice(index, 1);
+    delete playerScores[players]; // Remove player from scores
+    document.getElementById("display").innerText = playersAdded.join("\n");
   }
-
-  // Reset terningernes hold og score
-  diceOnHold = [false, false, false, false, false, false];
-  document.getElementById("score").innerText = "0";
-
-  // Skift til næste spiller
-  nextPlayer();
+  document.getElementById("playerId").value = "";
 }
 
-// Funktion til at skifte til næste spiller
-function nextPlayer() {
-  currentPlayerIndex = (currentPlayerIndex + 1) % playersAdded.length;
-  displayCurrentPlayer();
-}
-
-// Event listener for at tilføje score ved klik
-document.getElementById("addScoreButton").addEventListener("click", addScore);
-
-// Initial display, hvis spillere allerede er tilføjet
-if (playersAdded.length > 0) {
-  displayCurrentPlayer();
-}
-
-function displayCurrentPlayer() {
-  const currentPlayer = playersAdded[currentPlayerIndex];
-  document.getElementById("currentPlayerDisplay").innerText = `Nuværende spiller: ${currentPlayer.name}`;
-}
-
-function addScore() {
-  const diceScore = parseInt(document.getElementById("score").innerText, 10) || 0;
-  const currentPlayer = playersAdded[currentPlayerIndex];
-
-  if (diceScore + currentPlayer.score < 1000) {
-    currentPlayer.score += diceScore;
-  } else {
-    currentPlayer.score = 1000;
+function resetGame() {
+  gameStarted = false;
+  currentPlayerIndex = 0;
+  for (let player in playerScores) {
+    playerScores[player] = 0;
   }
-
-  diceOnHold = [false, false, false, false, false, false];
-  document.getElementById("score").innerText = "0";
-
-  nextPlayer();
-}
-
-function nextPlayer() {
-  currentPlayerIndex = (currentPlayerIndex + 1) % playersAdded.length;
-  displayCurrentPlayer();
-}
-
-document.getElementById("addScoreButton").addEventListener("click", addScore);
-
-if (playersAdded.length > 0) {
-  displayCurrentPlayer();
+  document.getElementById("startBtn").innerText = "Start Game";
+  document.getElementById("scoreDisplay").innerText = "";
+  rerollAllDice();
 }
