@@ -105,8 +105,8 @@ function endTurn() {
   if(currentPoints >= 1000) {
     score += currentPoints;
     document.getElementById('score').innerHTML = score;
-    currentPoints = 0;
   }
+  currentPoints = 0;
   resetDiceHold();
 }
 
