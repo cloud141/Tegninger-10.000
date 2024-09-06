@@ -4,7 +4,8 @@ let diceOnHold = [false, false, false, false, false, false];
 let heldDiceValues = [];
 let totalDiceValueArray = [];
 let gameStarted = false; //state to handle if game is started or not
-let currentScore = 0;
+let currentPoints = 0;
+let score = 0;
 
 function TriggerOnOfHold(dice) {
   if (!gameStarted) {
@@ -52,6 +53,8 @@ function startGame() {
   document.getElementById("startBtn").onclick = rulTerning;
 }
 
+
+
 function rerollAllDice() {
   const imgs = [
     "imgs/dices1.png",
@@ -83,6 +86,12 @@ function rerollAllDice() {
         "imgs/dices" + heldDiceValues[i - 1] + ".png";
     }
   }
+    let currentRound = checkForPoints();
+    totalDiceValueArray = [];
+    currentPoints += currentRound;
+    currentRound = 0;
+    document.getElementById('roundScore').innerHTML = currentPoints;
+    document.getElementById('currentPoints').innerHTML = currentRound;
 }
 
 function rulTerning() {
@@ -92,10 +101,18 @@ function rulTerning() {
   rerollAllDice();
 }
 
+function endTurn() {
+  if(currentPoints >= 1000) {
+    score += currentPoints;
+    document.getElementById('score').innerHTML = score;
+    currentPoints = 0;
+  }
+  resetDiceHold();
+}
+
 function checkForPoints(){
 
   let currentRound = 0;
-
   let chosenOnes = totalDiceValueArray.filter(function(dice) {
     return dice === 1;
   }).length;
@@ -224,9 +241,12 @@ switch (chosenSix) {
     break;
 }
 
-console.log(currentRound);
-}
 
+console.log(currentRound);
+document.getElementById('currentPoints').innerHTML = currentRound;
+return currentRound
+
+}
 
 // function checkForPoints() {
 //   let currentRound = 0;

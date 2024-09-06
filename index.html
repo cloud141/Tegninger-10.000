@@ -68,6 +68,11 @@
 
       <div class="scoreboard">
         Score
+        <p id="score"></p>
+        Held dice
+        <p id="currentPoints"></p>
+        Current Points
+        <p id="roundScore"></p>
         <div id="display"></div>
         <div id="playerName"></div>
       </div>
@@ -79,6 +84,7 @@
       </button>
       <button onclick="addPlayers()">Add player</button>
       <button onclick="deletePlayer()">Delete player</button>
+      <button onclick="endTurn()">End Turn</button>
     </div>
     <label>Name:</label>
     <input type="text" id="playerId" />
