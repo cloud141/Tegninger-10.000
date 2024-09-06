@@ -53,8 +53,6 @@ function startGame() {
   document.getElementById("startBtn").onclick = rulTerning;
 }
 
-
-
 function rerollAllDice() {
   const imgs = [
     "imgs/dices1.png",
@@ -86,12 +84,12 @@ function rerollAllDice() {
         "imgs/dices" + heldDiceValues[i - 1] + ".png";
     }
   }
-    let currentRound = checkForPoints();
-    totalDiceValueArray = [];
-    currentPoints += currentRound;
-    currentRound = 0;
-    document.getElementById('roundScore').innerHTML = currentPoints;
-    document.getElementById('currentPoints').innerHTML = currentRound;
+  let currentRound = checkForPoints();
+  totalDiceValueArray = [];
+  currentPoints += currentRound;
+  currentRound = 0;
+  document.getElementById("roundScore").innerHTML = currentPoints;
+  document.getElementById("currentPoints").innerHTML = currentRound;
 }
 
 function rulTerning() {
@@ -102,164 +100,159 @@ function rulTerning() {
 }
 
 function endTurn() {
-
   let currentRound = checkForPoints();
-    totalDiceValueArray = [];
-    currentPoints += currentRound;
-    currentRound = 0;
-    document.getElementById('roundScore').innerHTML = currentPoints;
-    document.getElementById('currentPoints').innerHTML = currentRound;
+  totalDiceValueArray = [];
+  currentPoints += currentRound;
+  currentRound = 0;
+  document.getElementById("roundScore").innerHTML = currentPoints;
+  document.getElementById("currentPoints").innerHTML = currentRound;
 
-  if(currentPoints >= 1000) {
+  if (currentPoints >= 1000) {
     score += currentPoints;
-    document.getElementById('score').innerHTML = score;
-  }
-  else if(score >= 1000) {
+    document.getElementById("score").innerHTML = score;
+  } else if (score >= 1000) {
     score += currentPoints;
-    document.getElementById('score').innerHTML = score;
+    document.getElementById("score").innerHTML = score;
   }
   currentPoints = 0;
   resetDiceHold();
 }
 
-function checkForPoints(){
-
+function checkForPoints() {
   let currentRound = 0;
-  let chosenOnes = totalDiceValueArray.filter(function(dice) {
+  let chosenOnes = totalDiceValueArray.filter(function (dice) {
     return dice === 1;
   }).length;
 
-  let chosenTwos = totalDiceValueArray.filter(function(dice) {
+  let chosenTwos = totalDiceValueArray.filter(function (dice) {
     return dice === 2;
   }).length;
 
-  let chosenThrees = totalDiceValueArray.filter(function(dice) {
+  let chosenThrees = totalDiceValueArray.filter(function (dice) {
     return dice === 3;
   }).length;
 
-  let chosenFours = totalDiceValueArray.filter(function(dice) {
+  let chosenFours = totalDiceValueArray.filter(function (dice) {
     return dice === 4;
   }).length;
 
-  let chosenFives = totalDiceValueArray.filter(function(dice) {
+  let chosenFives = totalDiceValueArray.filter(function (dice) {
     return dice === 5;
   }).length;
 
-  let chosenSix = totalDiceValueArray.filter(function(dice) {
+  let chosenSix = totalDiceValueArray.filter(function (dice) {
     return dice === 6;
   }).length;
 
-   let stringedValues = totalDiceValueArray.sort();
-    let sortedValues = stringedValues.toString();
-   if (sortedValues === "1,2,3,4,5,6") currentRound += 850;
-  
+  let stringedValues = totalDiceValueArray.sort();
+  let sortedValues = stringedValues.toString();
+  if (sortedValues === "1,2,3,4,5,6") currentRound += 850;
+
   switch (chosenOnes) {
-  case 1:
-    currentRound += 100;
-    break;
+    case 1:
+      currentRound += 100;
+      break;
     case 2:
       currentRound += 200;
       break;
-  case 3:
-    currentRound += 1000;
-    break;
-  case 4:
-    currentRound += 2000;
-    break;
+    case 3:
+      currentRound += 1000;
+      break;
+    case 4:
+      currentRound += 2000;
+      break;
     case 5:
       currentRound += 4000;
       break;
-      case 6:
+    case 6:
       currentRound += 10000;
       break;
-}
+  }
 
-switch (chosenTwos) {
-  case 3:
-    currentRound += 200;
-    break;
-  case 4:
-    currentRound += 400;
-    break;
-  case 5:
-    currentRound += 800;
-    break;
-  case 6:
-    currentRound += 1600;
-    break;
-}
+  switch (chosenTwos) {
+    case 3:
+      currentRound += 200;
+      break;
+    case 4:
+      currentRound += 400;
+      break;
+    case 5:
+      currentRound += 800;
+      break;
+    case 6:
+      currentRound += 1600;
+      break;
+  }
 
-switch (chosenThrees) {
-  case 3:
-    currentRound += 300;
-    break;
-  case 4:
-    currentRound += 600;
-    break;
-  case 5:
-    currentRound += 1200;
-    break;
-  case 6:
-    currentRound += 2400;
-    break;
-}
+  switch (chosenThrees) {
+    case 3:
+      currentRound += 300;
+      break;
+    case 4:
+      currentRound += 600;
+      break;
+    case 5:
+      currentRound += 1200;
+      break;
+    case 6:
+      currentRound += 2400;
+      break;
+  }
 
-switch (chosenFours) {
-  case 3:
-    currentRound += 400;
-    break;
-  case 4:
-    currentRound += 800;
-    break;
-  case 5:
-    currentRound += 1600;
-    break;
-  case 6:
-    currentRound += 3200;
-    break;
-}
+  switch (chosenFours) {
+    case 3:
+      currentRound += 400;
+      break;
+    case 4:
+      currentRound += 800;
+      break;
+    case 5:
+      currentRound += 1600;
+      break;
+    case 6:
+      currentRound += 3200;
+      break;
+  }
 
-switch (chosenFives) {
-  case 1:
-    currentRound += 50;
-    break;
-  case 2:
-    currentRound += 100;
-    break;
-  case 3:
-    currentRound += 500;
-    break;
-  case 4:
-    currentRound += 1000;
-    break;
-  case 5:
-    currentRound += 2000;
-    break;
-  case 6:
-    currentRound += 4000;
-    break;
-}
+  switch (chosenFives) {
+    case 1:
+      currentRound += 50;
+      break;
+    case 2:
+      currentRound += 100;
+      break;
+    case 3:
+      currentRound += 500;
+      break;
+    case 4:
+      currentRound += 1000;
+      break;
+    case 5:
+      currentRound += 2000;
+      break;
+    case 6:
+      currentRound += 4000;
+      break;
+  }
 
-switch (chosenSix) {
-  case 3:
-    currentRound += 600;
-    break;
-  case 4:
-    currentRound += 1200;
-    break;
-  case 5:
-    currentRound += 2400;
-    break;
-  case 6:
-    currentRound += 4800;
-    break;
-}
+  switch (chosenSix) {
+    case 3:
+      currentRound += 600;
+      break;
+    case 4:
+      currentRound += 1200;
+      break;
+    case 5:
+      currentRound += 2400;
+      break;
+    case 6:
+      currentRound += 4800;
+      break;
+  }
 
-
-console.log(currentRound);
-document.getElementById('currentPoints').innerHTML = currentRound;
-return currentRound
-
+  console.log(currentRound);
+  document.getElementById("currentPoints").innerHTML = currentRound;
+  return currentRound;
 }
 
 // function checkForPoints() {
@@ -275,7 +268,6 @@ return currentRound
 //   else if (sortedValues === "1,1,1,1,1,1") currentRound += 10000;
 //   else if (sortedValues === "5") currentRound += 50;
 //   else if (sortedValues === "5,5") currentRound += 100;
-
 
 //   console.log(currentRound);
 // }
@@ -301,3 +293,23 @@ function deletePlayer() {
     document.getElementById("playerId").value = "";
   }
 }
+
+var modal = document.getElementById("rulesModal");
+
+var btn = document.getElementById("rulesBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};

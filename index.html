@@ -78,13 +78,50 @@
       </div>
     </div>
     <div class="buttons">
-      <button>Rules</button>
+      <button id="rulesBtn">Rules</button>
       <button class="startBtn" id="startBtn" onclick="startGame()">
         Start Game
       </button>
-      <!-- <button onclick="addPlayers()">Add player</button>
-      <button onclick="deletePlayer()">Delete player</button> -->
       <button onclick="endTurn()">End Turn</button>
+    </div>
+
+    <div id="rulesModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Spilleregler for 10.000</h2>
+        <p>
+          Oprindelsen til terningspillet 10.000 er ukendt. Det er dog helt
+          sikkert at dette spil som så mange andre har forskellige regler
+          afhængig af hvor i landet man kommer fra.
+        </p>
+        <p>
+          På Terningspil.dk bruger vi følgende regler: Man spiller om at nå
+          10.000 point først.
+        </p>
+        <h3>Sådan får du point i spillet 10000:</h3>
+        <ul>
+          <li>En ener giver 100 point</li>
+          <li>En femmer giver 50 point</li>
+          <li>
+            Tre ens giver antal øjne på terningen gange 100. F.eks. giver 3
+            4’ere 400 point.
+          </li>
+          <li>Fire ens giver som 3 ens X 2. F.eks. giver 4 3’ere 300 X 2.</li>
+          <li>
+            Fem og seks ens giver som 3 ens X 2 for hver ekstra terning. F.eks.
+            giver 5 2’ere 200 X 2 X 2. 6 2’ere giver 200 X 2 X 2 X 2.
+          </li>
+          <li>
+            Enere er anderledes: tre enere giver 1000, fire enere giver 2000,
+            fem enere giver 4000 og seks enere giver 10.000 point.
+          </li>
+        </ul>
+        <h3>Hvordan tælles point sammen?</h3>
+        <p>
+          Hver gang man har slået, skal man mindst lægge én pointgivende terning
+          til side.
+        </p>
+      </div>
     </div>
     <!-- <label>Name:</label> -->
     <!-- <input type="text" id="playerId" /> -->
