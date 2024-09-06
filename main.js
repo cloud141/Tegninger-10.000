@@ -143,6 +143,51 @@ function checkForPoints(){
       break;
 }
 
+switch (chosenTwos) {
+  case 3:
+    currentRound += 200;
+    break;
+  case 4:
+    currentRound += 400;
+    break;
+  case 5:
+    currentRound += 800;
+    break;
+  case 6:
+    currentRound += 1600;
+    break;
+}
+
+switch (chosenThrees) {
+  case 3:
+    currentRound += 300;
+    break;
+  case 4:
+    currentRound += 600;
+    break;
+  case 5:
+    currentRound += 1200;
+    break;
+  case 6:
+    currentRound += 2400;
+    break;
+}
+
+switch (chosenFours) {
+  case 3:
+    currentRound += 400;
+    break;
+  case 4:
+    currentRound += 800;
+    break;
+  case 5:
+    currentRound += 1600;
+    break;
+  case 6:
+    currentRound += 3200;
+    break;
+}
+
 switch (chosenFives) {
   case 1:
     currentRound += 50;
@@ -150,8 +195,34 @@ switch (chosenFives) {
   case 2:
     currentRound += 100;
     break;
+  case 3:
+    currentRound += 500;
+    break;
+  case 4:
+    currentRound += 1000;
+    break;
+  case 5:
+    currentRound += 2000;
+    break;
+  case 6:
+    currentRound += 4000;
+    break;
 }
 
+switch (chosenSix) {
+  case 3:
+    currentRound += 600;
+    break;
+  case 4:
+    currentRound += 1200;
+    break;
+  case 5:
+    currentRound += 2400;
+    break;
+  case 6:
+    currentRound += 4800;
+    break;
+}
 
 console.log(currentRound);
 }
