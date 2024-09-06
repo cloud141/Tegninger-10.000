@@ -151,7 +151,7 @@ function checkForPoints(){
 
    let stringedValues = totalDiceValueArray.sort();
     let sortedValues = stringedValues.toString();
-   if (sortedValues === "1,2,3,4,5,6") currentRound += 1000;
+   if (sortedValues === "1,2,3,4,5,6") currentRound += 850;
   
   switch (chosenOnes) {
   case 1:
