@@ -33,7 +33,8 @@ function TriggerOnOfHold(dice) {
   }
   console.log(totalDiceValueArray.concat());
   checkForPoints();
-  if (diceOnHold.every((held) => held)) {
+  let currentRound = checkForPoints();
+  if (diceOnHold.every((held) => held) && currentRound !=0) {
     setTimeout(resetDiceHold, 1000);
   }
 }
@@ -42,16 +43,21 @@ function resetDiceHold() {
   for (let i = 0; i < 6; i++) {
     diceOnHold[i] = false;
     document.getElementById("dice" + (i + 1)).style.opacity = "1";
+    enableHeldDiceInteraction(); 
   }
+
   rerollAllDice();
 }
 
 function startGame() {
-  gameStarted = true;
-  rerollAllDice();
-  document.getElementById("startBtn").innerText = "Roll Again";
-  document.getElementById("startBtn").onclick = rulTerning;
+  if (gameStarted === false) {
+      gameStarted = true;
+      rerollAllDice();
+      document.getElementById("startBtn").innerText = "Roll Again"; 
+      document.getElementById("startBtn").onclick = rulTerning; 
+  }
 }
+
 
 function rerollAllDice() {
   const imgs = [
@@ -76,9 +82,10 @@ function rerollAllDice() {
   for (let i = 1; i <= 6; i++) {
     if (!diceOnHold[i - 1]) {
       const randomIndex = Math.floor(Math.random() * imgs.length);
-
       document.getElementById("dices" + i).src = imgs[randomIndex];
       diceValues[i - 1] = randomIndex + 1;
+      disableHeldDiceInteraction();
+
     } else {
       document.getElementById("dices" + i).src =
         "imgs/dices" + heldDiceValues[i - 1] + ".png";
@@ -92,11 +99,33 @@ function rerollAllDice() {
   document.getElementById("currentPoints").innerHTML = currentRound;
 }
 
+function disableHeldDiceInteraction() {
+  for (let i = 0; i < diceOnHold.length; i++) {
+    if (diceOnHold[i]) {  
+      const diceElement = document.getElementById("dice" + (i + 1));
+      diceElement.onclick = null; 
+      diceElement.style.opacity = "0.5"; 
+    }
+  }
+}
+function enableHeldDiceInteraction() {
+  for (let i = 0; i < diceOnHold.length; i++) {
+    const diceElement = document.getElementById("dice" + (i + 1));
+    diceElement.onclick = function() {
+      TriggerOnOfHold(diceElement); // Re-assign the original event handler
+    }
+  }
+}
+
 function rulTerning() {
-  // const randomIndex = Math.floor(Math.random() * imgs.length);
-  // document.getElementById("dices" + i).src = imgs[randomIndex];
-  console.table(heldDiceValues);
-  rerollAllDice();
+  let currentRound = checkForPoints();
+  if (currentRound === 0) {
+    alert('You need to choose points if you want to roll again');
+  }
+  else{
+    console.table(heldDiceValues);
+    rerollAllDice();
+  }
 }
 
 function endTurn() {
@@ -144,7 +173,7 @@ function checkForPoints() {
     return dice === 6;
   }).length;
 
-  let stringedValues = totalDiceValueArray.sort();
+  let stringedValues = totalDiceValueArray.sort(); 
   let sortedValues = stringedValues.toString();
   if (sortedValues === "1,2,3,4,5,6") currentRound += 850;
 
