@@ -118,26 +118,11 @@ function enableHeldDiceInteraction() {
 }
 
 function rulTerning() {
-  let currentRound = checkForPoints();
-
-  // Group the dice values to handle combinations
-  let diceValueCount = {};
-  heldDiceValues.forEach(diceValue => {
-    if (diceValue !== null) {
-      diceValueCount[diceValue] = (diceValueCount[diceValue] || 0) + 1;
-    }
-  });
-
-  // Check if all held dice have valid points according to the rules
-  let allDiceHavePoints = Object.entries(diceValueCount).every(([diceValue, count]) => {
-    return checkForPoints(diceValue, count);
-  });
-
+  let currentRound = totalDiceValueArray;
   if (currentRound === 0) {
     alert('You need to choose points if you want to roll again');
-  } else if (!allDiceHavePoints) {
-    alert('Some held dice do not have points. You can only reroll when all held dice have points.');
-  } else {
+  }
+  else{
     console.table(heldDiceValues);
     rerollAllDice();
   }
