@@ -119,7 +119,7 @@ function enableHeldDiceInteraction() {
 
 function rulTerning() {
   let currentRound = totalDiceValueArray;
-  if (currentRound === 0) {
+  if (currentRound.length === 0) {
     alert('You need to choose points if you want to roll again');
   }
   else{
