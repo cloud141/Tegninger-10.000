@@ -128,6 +128,7 @@ function rulTerning() {
   }
 }
 
+
 function endTurn() {
   let currentRound = checkForPoints();
   totalDiceValueArray = [];
