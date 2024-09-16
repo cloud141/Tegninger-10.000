@@ -119,33 +119,96 @@ function enableHeldDiceInteraction() {
 
 function rulTerning() {
   let currentRound = totalDiceValueArray;
+
+  // Check if there are held dice
   if (currentRound.length === 0) {
     alert('You need to choose points if you want to roll again');
+    return;
   }
-  else{
-    console.table(heldDiceValues);
-    rerollAllDice();
+
+  // Check if all held dice are point-giving
+  let isAllHeldDiceValid = areAllHeldDiceGivingPoints();
+
+  if (!isAllHeldDiceValid) {
+    // Alert if not all held dice are giving points
+    alert('You need to only choose point-giving dice or valid combinations before rerolling');
+    return;
   }
+
+  // If all point-giving dice are selected, reroll the unheld dice
+  console.table(heldDiceValues);
+  rerollAllDice();
 }
 
+// Function to check if all held dice are contributing to the points
+function areAllHeldDiceGivingPoints() {
+  let diceCount = {}; // Object to store counts of each dice value
+
+  // Count how many times each dice value is held
+  for (let i = 0; i < diceOnHold.length; i++) {
+    if (diceOnHold[i]) {
+      const value = heldDiceValues[i];
+      diceCount[value] = (diceCount[value] || 0) + 1;
+    }
+  }
+
+  // Now check if all held dice are part of valid point-giving combinations
+  let validCombinations = false;
+  for (let diceValue in diceCount) {
+    const count = diceCount[diceValue];
+    diceValue = parseInt(diceValue);
+
+    switch (diceValue) {
+      case 1:
+        // 1 gives points individually and in combinations
+        if (count >= 1) validCombinations = true; // 1's always give points
+        break;
+
+      case 5:
+        // 5 gives points individually and in combinations
+        if (count >= 1) validCombinations = true; // 5's always give points
+        break;
+
+      default:
+        // Other dice (2, 3, 4, 6) only give points in sets of 3 or more
+        if (count >= 3) validCombinations = true; // If there are 3 or more of the same dice, it's valid
+        break;
+    }
+
+    // If the dice doesn't form any valid point-giving combination (1's, 5's, or 3-of-a-kind),
+    // return false, as rerolling is not allowed
+    if (diceValue !== 1 && diceValue !== 5 && count < 3) {
+      return false; // Invalid combination found, block reroll
+    }
+  }
+
+  return validCombinations; // All held dice are part of valid combinations
+}
 
 function endTurn() {
   let currentRound = checkForPoints();
-  totalDiceValueArray = [];
-  currentPoints += currentRound;
-  currentRound = 0;
-  document.getElementById("roundScore").innerHTML = currentPoints;
-  document.getElementById("currentPoints").innerHTML = currentRound;
-
-  if (currentPoints >= 1000) {
-    score += currentPoints;
-    document.getElementById("score").innerHTML = score;
-  } else if (score >= 1000) {
-    score += currentPoints;
-    document.getElementById("score").innerHTML = score;
+  if (currentRound === 0) {
+    alert('You need to choose points if you want to end turn');
+    return;
   }
-  currentPoints = 0;
-  resetDiceHold();
+  else{
+
+    totalDiceValueArray = [];
+    currentPoints += currentRound;
+    currentRound = 0;
+    document.getElementById("roundScore").innerHTML = currentPoints;
+    document.getElementById("currentPoints").innerHTML = currentRound;
+    
+    if (currentPoints >= 1000) {
+      score += currentPoints;
+      document.getElementById("score").innerHTML = score;
+    } else if (score >= 1000) {
+      score += currentPoints;
+      document.getElementById("score").innerHTML = score;
+    }
+    currentPoints = 0;
+    resetDiceHold();
+  }
 }
 
 function checkForPoints() {
